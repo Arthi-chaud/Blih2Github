@@ -56,6 +56,7 @@ do
 	git -C "$blih_dir" remote add origin git@github.com:"$GITHUB_ORGA"/"$repo_name".git
 	if ! push "$blih_dir" ;
 	then
+		git -C "$blih_dir" remote remove origin 2> /dev/null > /dev/null;
 		git -C "$blih_dir" remote add origin https://github.com/"$GITHUB_ORGA"/"$repo_name".git
 	fi
 	push "$blih_dir"
