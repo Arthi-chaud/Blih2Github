@@ -12,6 +12,8 @@ GITHUB_ORGA="$2"
 GITHUB_ACCESSTOKEN="$3"
 DIR="$4"
 
+echo "$GITHUB_UNAME"
+
 if [[ ! -d "$DIR" ]];
 then
 	echo "'$DIR': Is not an accessible directory"
