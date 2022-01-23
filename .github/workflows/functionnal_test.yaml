@@ -1,0 +1,21 @@
+name: Functionnal Testing
+on: [push, workflow_dispatch]
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runs-on: ubuntu-latest
+            os: Linux
+          - runs-on: windows-latest
+            os: Windows
+          - runs-on: macOS-latest
+            os: macOs
+    name: "Run test on ${{ matrix.os }}"
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Say hello
+        run: echo "Hello World"
