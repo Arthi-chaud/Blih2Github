@@ -15,9 +15,13 @@ jobs:
             os: macOs
     name: "Run test on ${{ matrix.os }}"
     runs-on: ${{ matrix.runs-on }}
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v1
       - name: Create testing environment
+
         run: |
           git config --global user.email "${GITHUB_ACTOR}@github.com";
           git config --global user.name "${GITHUB_ACTOR}";
