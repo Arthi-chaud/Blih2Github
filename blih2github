@@ -36,9 +36,8 @@ do
 		-d "{\"name\":\"$repo_name\", \"visibility\": \"private\"}" --write-out %{http_code} --silent --output curl_output.log)
 	if [[ "$http_code" != "201" ]];
 	then
-		echo "$http_code"
-		echo "Oops.. Something went wrong with Github while creating the repository..."
-		cat curl_output.log
+		echo "Oops.. Something went wrong with Github while creating the repository... Here is what happened:"
+		cat curl_output.log ; rm curl_output.log
 		exit 1
 	fi
 	rm -f curl_output.log
