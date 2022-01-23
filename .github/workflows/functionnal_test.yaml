@@ -13,10 +13,10 @@ jobs:
         include:
           - runs-on: ubuntu-latest
             os: Linux
-          - runs-on: windows-latest
-            os: Windows
-          - runs-on: macOS-latest
-            os: macOs
+          # - runs-on: windows-latest
+          #   os: Windows
+          # - runs-on: macOS-latest
+          #   os: macOs
     name: "Run test on ${{ matrix.os }}"
     runs-on: ${{ matrix.runs-on }}
     defaults:
