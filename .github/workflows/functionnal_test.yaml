@@ -17,5 +17,16 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
     steps:
       - uses: actions/checkout@v1
-      - name: Say hello
-        run: echo "Hello World"
+      - name: Create testing environment
+        run: |
+        mkdir tests && cd tests
+        mkdir testa testb testc
+        touch testd testa/a testb/b testc/c
+        git -C testa init
+        git -C testc init
+        git -C testa add .
+        git -C testc add .
+        git -C testa commit -m "a"
+        git -C testc commit -m "c"
+      - name: Check testing environment
+        run: ls -lR ; tree
