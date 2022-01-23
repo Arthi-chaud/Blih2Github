@@ -56,11 +56,13 @@ do
 
 	## adding remote to local repo
 	remove_origin "$blih_dir"
-	## Push to remote
+	## Push to remote via SSH
 	git -C "$blih_dir" remote add origin "git@github.com:$GITHUB_ORGA/$repo_name.git"
+	## If Push failed
 	if ! push "$blih_dir" ;
 	then
-		git -C "$blih_dir" remote set-url origin "https://$GITHUB_ORGA:$GITHUB_ACCESSTOKEN@$repo_name"
+		## Push via http
+		git -C "$blih_dir" remote set-url origin "https://$GITHUB_ORGA:$GITHUB_ACCESSTOKEN@github.com/$GITHUB_ORGA/$repo_name"
 		if ! push "$blih_dir";
 		then
 			echo "Oops.. Something went wrong while pushing to remote"
