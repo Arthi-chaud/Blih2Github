@@ -5,6 +5,8 @@ jobs:
   tests:
     strategy:
       fail-fast: false
+      env:
+        orga: EpiBlih
       matrix:
         include:
           - runs-on: ubuntu-latest
@@ -21,7 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Create testing environment
-
         run: |
           git config --global user.email "${GITHUB_ACTOR}@github.com";
           git config --global user.name "${GITHUB_ACTOR}";
@@ -34,5 +35,17 @@ jobs:
           git -C testc add .
           git -C testa commit -m "a"
           git -C testc commit -m "c"
-      - name: Check testing environment
-        run: ls -lR ; tree
+      - name: Run blih2github
+        run: ./blih2github  "${GITHUB_ACTOR}" "${{env.orga}}" "${GITHUB_TOKEN}" tests
+      - name: Check repository exists
+        run: |
+          git pull git@github.com:${{env.orga}}/testb.git; ## the repo should not exist
+          git pull git@github.com:${{env.orga}}/testa.git
+          git pull git@github.com:${{env.orga}}/testc.git
+          test -f testa/a
+          test ! -e testb
+          test -f testc/c
+      - name: Cleanup
+        run: |
+         	curl -i -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testa\"}"
+          curl -i -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testc\"}"
