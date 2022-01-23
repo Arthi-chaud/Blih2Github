@@ -17,7 +17,7 @@ Blih2Github allows you to upload your old, dusty and krusty Epitech blih reposit
 
 A copy of each repositoy will be pushed in a Github organisation. This organisation will be visible from your profile, but will appear empty: The copy of the repositories will be private. only you will be able to see them.
 
-The script will parse each folder in the directory it is executed in. If a folder is a git repository (i.e. has a ```.git``` folder in it). Using Github's API, it'll create a remote repository in the previously-created organisation. The name of the repo will the name of the folder. Then, it'll add it to the local repo as the origin remote. **If a previous *remote* remote was defined, it'll be overwritten**. Then, a simple ```git push origin master``` and you're ready to go!
+The script will parse each folder in the directory it is executed in. If a folder is a git repository (i.e. has a ```.git``` folder in it). Using Github's API, it'll create a remote repository in the previously-created organisation. The name of the repo will the name of the folder. Then, it'll add it to the local repo as the origin remote. **If a previous *remote* remote was defined, it'll be overwritten**. Then it's pushed you're ready to go!
 
 ## Requirements
 
