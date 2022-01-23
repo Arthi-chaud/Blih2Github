@@ -47,5 +47,5 @@ jobs:
           test -f testc/c
       - name: Cleanup
         run: |
-         	curl -i -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testa\"}"
+          curl -i -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testa\"}"
           curl -i -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testc\"}"
