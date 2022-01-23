@@ -52,7 +52,7 @@ do
 		exit 1
 	fi
 	rm -f curl_output.log
-
+	# Waiting for the repository to be available
 	sleep 6
 	## adding remote to local repo
 	remove_origin "$blih_dir"

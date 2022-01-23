@@ -42,7 +42,6 @@ jobs:
         run: ./blih2github  "${GITHUB_ACTOR}" "${{env.orga}}" "${{ secrets.atoken }}" tests
       - name: Check repository exists
         run: |
-        GITHUB_ORGA:$GITHUB_ACCESSTOKEN@github.com/$GITHUB_ORGA/$repo_name
           git pull https://${{env.orga}}:${{ secrets.atoken }}@github.com/${{env.orga}}/testb.git ; ## the repo should not exist
           git pull https://${{env.orga}}:${{ secrets.atoken }}@github.com/${{env.orga}}/${{env.dir1}}.git
           git pull https://${{env.orga}}:${{ secrets.atoken }}@github.com/${{env.orga}}/${{env.dir3}}.git
