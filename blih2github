@@ -53,7 +53,7 @@ do
 	fi
 	rm -f curl_output.log
 
-
+	sleep 6
 	## adding remote to local repo
 	remove_origin "$blih_dir"
 	## Push to remote via SSH
