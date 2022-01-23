@@ -38,11 +38,11 @@ do
 		continue
 	fi
 	## adding remote to local repo
-	git -C "$blih_dir" remote remove origin;
+	git -C "$blih_dir" remote remove origin 2> /dev/null > /dev/null;
 	## Push to remote
 	(git -C "$blih_dir" remote add origin git@github.com:"$GITHUB_ORGA"/"$repo_name".git || \
-	git -C "$blih_dir" remote add origin https://github.com/"$GITHUB_ORGA"/"$repo_name"/git) &&
-	(git -C "$blih_dir" push origin master || git -C "$blih_dir" push origin main)
+	git -C "$blih_dir" remote add origin https://github.com/"$GITHUB_ORGA"/"$repo_name".git) &&
+	(git -C "$blih_dir" push origin master || git -C "$blih_dir" push origin main) 2> /dev/null > /dev/null
 	if [ "$?" -ne "0" ];
 	then
 		echo "Oops.. Something went wrong while pushing to remote, moving on to the next one..."
