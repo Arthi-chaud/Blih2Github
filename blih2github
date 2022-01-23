@@ -2,7 +2,11 @@
 
 ## Push repo
 push() {
-	(git -C "$1" push origin master || git -C "$1" push origin main)
+	(git -C "$1" push origin master || (echo "SSH FAIL" ; git -C "$1" push origin main))
+}
+
+remove_origin() {
+	git -C "$1" remote remove origin 2> /dev/null > /dev/null;
 }
 
 ## Checks the number of argument is correct
@@ -51,12 +55,12 @@ do
 
 
 	## adding remote to local repo
-	git -C "$blih_dir" remote remove origin 2> /dev/null > /dev/null;
+	remove_origin "$blih_dir"
 	## Push to remote
 	git -C "$blih_dir" remote add origin "git@github.com:$GITHUB_ORGA/$repo_name.git"
 	if ! push "$blih_dir" ;
 	then
-		git -C "$blih_dir" remote remove origin 2> /dev/null > /dev/null;
+		remove_origin "$blih_dir"
 		git -C "$blih_dir" remote add origin "https://github.com/$GITHUB_ORGA/$repo_name.git"
 	fi
 	push "$blih_dir"
