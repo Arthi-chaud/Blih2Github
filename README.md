@@ -25,12 +25,13 @@ To use Blih2Github, you'll need the following:
 - A Github account. You must be able to push using SSH.
 - A [Github organisation](https://github.com/account/organizations/new?coupon=&plan=team_free)
 - A [Github API Key](https://github.com/settings/tokens/new) (Tick '*repo*' to give the acces token the required scopes)
+- Bash
+- An internet connection
 
 ## Usage
 
 ```bash
-## In the folder as your Blih Repos
-blih2github $GITHUB_UNAME $GITHUB_ORGA $GITHUB_ACCESSTOKEN
+blih2github $GITHUB_UNAME $GITHUB_ORGA $GITHUB_ACCESSTOKEN $DIR
 ```
 
 where:
@@ -38,9 +39,10 @@ where:
 - `$GITHUB_UNAME` is your GitHub username
 - `$GITHUB_ORGA` is the name of the organisation
 - `$GITHUB_ACCESSTOKEN` is the Github's API Access Token
+- `$DIR` is the path to where the blih repositories are
 
 For example:
 
 ```bash
-blih2github 'Arthi-chaud' 'EpiBlih' 'eW91IHJlYWxseSB0aG91Z2ggSSB3YXMgdGhpcyBzdHVwaWQ/Cg=='
+blih2github 'Arthi-chaud' 'EpiBlih' 'eW91IHJlYWxseSB0aG91Z2ggSSB3YXMgdGhpcyBzdHVwaWQ/Cg==' 'Semestre 1'
 ```
