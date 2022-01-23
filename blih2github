@@ -2,7 +2,7 @@
 
 ## Push repo
 push() {
-	(git -C "$1" push origin master || git -C "$1" push origin main)
+	git -C "$1" push origin master #|| git -C "$1" push origin main
 }
 
 remove_origin() {
