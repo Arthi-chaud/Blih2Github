@@ -20,6 +20,10 @@ then
 	exit 1
 fi
 
+push() {
+	git -C "$1" push origin master || git -C "$1" push origin main
+}
+
 for blih_dir in "$DIR"/**;
 do
 	# If it is not a git repository, continue
@@ -28,6 +32,8 @@ do
 		continue
 	fi
 	repo_name=$(basename "$blih_dir")
+
+
 	echo "'$repo_name' is a Git Repository"
 	## Create repo in Github
 	echo "Creating '$repo_name' repository in '$GITHUB_ORGA'..."
@@ -41,13 +47,18 @@ do
 		exit 1
 	fi
 	rm -f curl_output.log
+
+
 	## adding remote to local repo
-	git -C "$blih_dir" remote remove origin #2> /dev/null > /dev/null;
+	git -C "$blih_dir" remote remove origin 2> /dev/null > /dev/null;
 	## Push to remote
-	(git -C "$blih_dir" remote add origin git@github.com:"$GITHUB_ORGA"/"$repo_name".git || \
-	git -C "$blih_dir" remote add origin https://github.com/"$GITHUB_ORGA"/"$repo_name".git) &&
-	(git -C "$blih_dir" push origin master || git -C "$blih_dir" push origin main) #2> /dev/null > /dev/null
-	if [ "$?" -ne "0" ];
+	git -C "$blih_dir" remote add origin git@github.com:"$GITHUB_ORGA"/"$repo_name".git
+	if ! push "$blih_dir" ;
+	then
+		git -C "$blih_dir" remote add origin https://github.com/"$GITHUB_ORGA"/"$repo_name".git
+	fi
+	push "$blih_dir"
+	if ! push "$blih_dir";
 	then
 		echo "Oops.. Something went wrong while pushing to remote, moving on to the next one..."
 		continue
