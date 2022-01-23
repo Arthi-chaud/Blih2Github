@@ -10,7 +10,7 @@ foreach ($repos as $repo) {
 	chdir($repo);
 	$repo_name = basename($repo);
 	echo "$repo_name\n";
-	system("curl -i -u '$gh_uname:$personnal_gh_token' -X POST -H \"Accept: application/vnd.github.v3+json\"	https://api.github.com/orgs/EpiBlih/repos -d '{\"name\":\"$repo_name\", \"visibility\": \"private\"}'");
+	system("curl -i -u '$gh_uname:$personnal_gh_token' -X POST -H \"Accept: application/vnd.github.v3+json\"	https://api.github.com/orgs/$orga_name/repos -d '{\"name\":\"$repo_name\", \"visibility\": \"private\"}'");
 	system("git remote remove origin");
 	system("git remote add origin git@github.com:$orga_name/$repo_name.git");
 	system("git push origin master");
