@@ -24,8 +24,8 @@ jobs:
       - uses: actions/checkout@v1
       - name: Create testing environment
         run: |
-          git config --global user.email "$GITHUB_ACTOR@github.com";
-          git config --global user.name "$GITHUB_ACTOR";
+          git config --global user.email "${{ secrets.GITHUB_ACTOR }}@github.com";
+          git config --global user.name "${{ secrets.GITHUB_ACTOR }}";
           mkdir tests && cd tests
           mkdir testa testb testc
           touch testd testa/a testb/b testc/c
@@ -36,7 +36,7 @@ jobs:
           git -C testa commit -m "a"
           git -C testc commit -m "c"
       - name: Run blih2github
-        run: ./blih2github  "$GITHUB_ACTOR" "${{env.orga}}" "${{ secrets.GITHUB_TOKEN }}" tests
+        run: ./blih2github  "${{ secrets.GITHUB_ACTOR }}" "${{env.orga}}" "${{ secrets.GITHUB_TOKEN }}" tests
       - name: Check repository exists
         run: |
           git pull git@github.com:${{env.orga}}/testb.git; ## the repo should not exist
