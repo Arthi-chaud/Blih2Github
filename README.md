@@ -2,6 +2,8 @@
 
 ## Transfer your local Blih repositories to Github
 
+[![Functionnal Testing](https://github.com/Arthi-chaud/Blih2Github/actions/workflows/functionnal_test.yaml/badge.svg)](https://github.com/Arthi-chaud/Blih2Github/actions/workflows/functionnal_test.yaml)
+
 Are you an Epitech Student? Are you from a promotion graduation in 2024 or before?
 Are tired of having your old school project on your machine, because Epitech's Blih is down? Because you don't want them in your Github repositories? Because transfer would be tideous and you're not sure it'd worth ?
 
@@ -27,6 +29,7 @@ To use Blih2Github, you'll need the following:
 - A [Github API Key](https://github.com/settings/tokens/new) (Tick '*repo*' to give the acces token the required scopes)
 - Bash
 - An internet connection
+- Linux, Windows or macOs
 
 ## Usage
 
@@ -46,3 +49,7 @@ For example:
 ```bash
 blih2github 'Arthi-chaud' 'EpiBlih' 'eW91IHJlYWxseSB0aG91Z2ggSSB3YXMgdGhpcyBzdHVwaWQ/Cg==' 'Semestre 1'
 ```
+
+## Testing
+
+The script is tested, using GitHub Actions
