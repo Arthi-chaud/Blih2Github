@@ -36,7 +36,7 @@ jobs:
           git -C testa commit -m "a"
           git -C testc commit -m "c"
       - name: Run blih2github
-        run: ./blih2github  "${GITHUB_ACTOR}" "${{env.orga}}" "${GITHUB_TOKEN}" tests
+        run: ./blih2github  "${GITHUB_ACTOR}" "${{env.orga}}" "${{ secrets.GITHUB_TOKEN }}" tests
       - name: Check repository exists
         run: |
           git pull git@github.com:${{env.orga}}/testb.git; ## the repo should not exist
@@ -47,5 +47,5 @@ jobs:
           test -f testc/c
       - name: Cleanup
         run: |
-          curl -i -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testa\"}"
-          curl -i -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testc\"}"
+          curl -i -u "${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testa\"}"
+          curl -i -u "${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testc\"}"
