@@ -60,7 +60,7 @@ do
 	git -C "$blih_dir" remote add origin "git@github.com:$GITHUB_ORGA/$repo_name.git"
 	if ! push "$blih_dir" ;
 	then
-		git -C "$blih_dir" remote set-url origin "https://github.com/$GITHUB_ORGA/$repo_name.git"
+		git -C "$blih_dir" remote set-url origin "https://$GITHUB_ORGA:${{ env.atoken }}@${repo_name}"
 		if ! push "$blih_dir";
 		then
 			echo "Oops.. Something went wrong while pushing to remote"
