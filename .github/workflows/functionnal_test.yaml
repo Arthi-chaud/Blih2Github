@@ -35,6 +35,7 @@ jobs:
           git -C testc add .
           git -C testa commit -m "a"
           git -C testc commit -m "c"
+          git config --global --list
       - name: Run blih2github
         run: ./blih2github  "${GITHUB_ACTOR}" "${{env.orga}}" "${GITHUB_TOKEN}" tests
       - name: Check repository exists
