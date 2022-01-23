@@ -2,7 +2,7 @@
 
 ## Push repo
 push() {
-	git -C "$1" push origin master || git -C "$1" push origin main
+	(git -C "$1" push origin master || git -C "$1" push origin main)
 }
 
 ## Checks the number of argument is correct
@@ -53,11 +53,11 @@ do
 	## adding remote to local repo
 	git -C "$blih_dir" remote remove origin 2> /dev/null > /dev/null;
 	## Push to remote
-	git -C "$blih_dir" remote add origin git@github.com:"$GITHUB_ORGA"/"$repo_name".git
+	git -C "$blih_dir" remote add origin "git@github.com:$GITHUB_ORGA/$repo_name.git"
 	if ! push "$blih_dir" ;
 	then
 		git -C "$blih_dir" remote remove origin 2> /dev/null > /dev/null;
-		git -C "$blih_dir" remote add origin https://github.com/"$GITHUB_ORGA"/"$repo_name".git
+		git -C "$blih_dir" remote add origin "https://github.com/$GITHUB_ORGA/$repo_name.git"
 	fi
 	push "$blih_dir"
 	if ! push "$blih_dir";
