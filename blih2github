@@ -62,8 +62,8 @@ do
 	push "$blih_dir"
 	if ! push "$blih_dir";
 	then
-		echo "Oops.. Something went wrong while pushing to remote, moving on to the next one..."
-		continue
+		echo "Oops.. Something went wrong while pushing to remote"
+		exit 1
 	fi
 	echo "Congrats! '$repo_name' is now available on github! check it out here: https://github.com/$GITHUB_ORGA/$repo_name."
 done

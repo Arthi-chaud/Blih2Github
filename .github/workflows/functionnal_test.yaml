@@ -42,7 +42,7 @@ jobs:
         run: ./blih2github  "${GITHUB_ACTOR}" "${{env.orga}}" "${{ secrets.atoken }}" tests
       - name: Check repository exists
         run: |
-          git pull https://github.com/${{env.orga}}/testb.git; ## the repo should not exist
+          git pull https://github.com/${{env.orga}}/testb.git ; ## the repo should not exist
           git pull https://github.com/${{env.orga}}/${{env.dir1}}.git
           git pull https://github.com/${{env.orga}}/${{env.dir3}}.git
           test -f ${{env.dir1}}/a
