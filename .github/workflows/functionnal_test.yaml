@@ -5,6 +5,8 @@ jobs:
   tests:
     env:
       orga: EpiBlih
+      dir1: test1${{ matrix.runs-on }}
+      dir3: test3${{ matrix.runs-on }}
     strategy:
       fail-fast: false
       matrix:
@@ -27,26 +29,26 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}@github.com";
           git config --global user.name "${GITHUB_ACTOR}";
           mkdir tests && cd tests
-          mkdir testa testb testc
-          touch testd testa/a testb/b testc/c
-          git -C testa init
-          git -C testc init
-          git -C testa add .
-          git -C testc add .
-          git -C testa commit -m "a"
-          git -C testc commit -m "c"
+          mkdir ${{env.dir1}} testb ${{env.dir3}}
+          touch testd ${{env.dir1}}/a testb/b ${{env.dir3}}/c
+          git -C ${{env.dir1}} init
+          git -C ${{env.dir3}} init
+          git -C ${{env.dir1}} add .
+          git -C ${{env.dir3}} add .
+          git -C ${{env.dir1}} commit -m "a"
+          git -C ${{env.dir3}} commit -m "c"
           git config --global --list
       - name: Run blih2github
         run: ./blih2github  "${GITHUB_ACTOR}" "${{env.orga}}" "${{ secrets.atoken }}" tests
       - name: Check repository exists
         run: |
           git pull git@github.com:${{env.orga}}/testb.git; ## the repo should not exist
-          git pull git@github.com:${{env.orga}}/testa.git
-          git pull git@github.com:${{env.orga}}/testc.git
-          test -f testa/a
+          git pull git@github.com:${{env.orga}}/${{env.dir1}}.git
+          git pull git@github.com:${{env.orga}}/${{env.dir3}}.git
+          test -f ${{env.dir1}}/a
           test ! -e testb
-          test -f testc/c
+          test -f ${{env.dir3}}/c
       - name: Cleanup
         run: |
-          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testa\"}"
-          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"testc\"}"
+          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"${{env.dir1}}\"}"
+          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X POST -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"${{env.dir3}}\"}"
