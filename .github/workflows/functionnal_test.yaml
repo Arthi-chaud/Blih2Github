@@ -51,5 +51,5 @@ jobs:
       - name: Cleanup
         if: ${{ always() }}
         run: |
-          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X DELETE -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"${{env.dir1}}\"}"
-          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X DELETE -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/repos" -d "{\"name\":\"${{env.dir3}}\"}"
+          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X DELETE -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/${{env.dir1}}\"}"
+          curl -i -u "${GITHUB_ACTOR}:${{ secrets.atoken }}" -X DELETE -H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/${{env.orga}}/${{env.dir3}}\"}"
