@@ -31,12 +31,14 @@ do
 	echo "Creating '$repo_name' repository in '$GITHUB_ORGA'..."
 	http_code=$(curl -i -u "$GITHUB_UNAME:$GITHUB_ACCESSTOKEN" -X POST \
 		-H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/$GITHUB_ORGA/repos" \
-		-d "{\"name\":\"$repo_name\", \"visibility\": \"private\"}" --silent --output /dev/null)
+		-d "{\"name\":\"$repo_name\", \"visibility\": \"private\"}" --silent --output curl_output.log)
 	if [ "$http_code" -ne "200" ];
 	then
-		echo "Oops.. Something went wrong with Github while creating the repository, moving on to the next one..."
-		continue
+		echo "Oops.. Something went wrong with Github while creating the repository..."
+		cat curl_output.log
+		exit 1
 	fi
+	rm -f curl_output.log
 	## adding remote to local repo
 	git -C "$blih_dir" remote remove origin #2> /dev/null > /dev/null;
 	## Push to remote
