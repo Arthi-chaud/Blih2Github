@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Checks the number of argument is correct
+if [ "$#" -ne "3" ];
+then
+	echo 'USAGE: blih2github $GITHUB_UNAME $GITHUB_ORGA $GITHUB_ACCESSTOKEN'
+	exit 1
+fi
+
