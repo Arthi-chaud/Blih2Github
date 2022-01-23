@@ -34,7 +34,7 @@ do
 	http_code=$(curl -i -u "$GITHUB_UNAME:$GITHUB_ACCESSTOKEN" -X POST \
 		-H "Accept: application/vnd.github.v3+json" "https://api.github.com/orgs/$GITHUB_ORGA/repos" \
 		-d "{\"name\":\"$repo_name\", \"visibility\": \"private\"}" --silent --output curl_output.log)
-	if [[ "$http_code" != "200" ]];
+	if [[ "$http_code" != "201" ]];
 	then
 		echo "Oops.. Something went wrong with Github while creating the repository..."
 		cat curl_output.log
