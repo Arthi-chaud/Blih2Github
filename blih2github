@@ -60,13 +60,12 @@ do
 	git -C "$blih_dir" remote add origin "git@github.com:$GITHUB_ORGA/$repo_name.git"
 	if ! push "$blih_dir" ;
 	then
-		remove_origin "$blih_dir"
-		git -C "$blih_dir" remote add origin "https://github.com/$GITHUB_ORGA/$repo_name.git"
-	fi
-	if ! push "$blih_dir";
-	then
-		echo "Oops.. Something went wrong while pushing to remote"
-		exit 1
+		git -C "$blih_dir" remote set-url origin "https://github.com/$GITHUB_ORGA/$repo_name.git"
+		if ! push "$blih_dir";
+		then
+			echo "Oops.. Something went wrong while pushing to remote"
+			exit 1
+		fi
 	fi
 	echo "Congrats! '$repo_name' is now available on github! check it out here: https://github.com/$GITHUB_ORGA/$repo_name."
 done
