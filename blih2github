@@ -1,5 +1,10 @@
 #!/bin/bash
 
+## Push repo
+push() {
+	git -C "$1" push origin master || git -C "$1" push origin main
+}
+
 ## Checks the number of argument is correct
 if [ "$#" -ne "4" ];
 then
@@ -19,10 +24,6 @@ then
 	echo "'$DIR': Is not an accessible directory"
 	exit 1
 fi
-
-push() {
-	git -C "$1" push origin master || git -C "$1" push origin main
-}
 
 for blih_dir in "$DIR"/**;
 do
