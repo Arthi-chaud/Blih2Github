@@ -22,7 +22,7 @@ The script will parse each folder in the directory it is executed in. If a folde
 To use Blih2Github, you'll need the following:
 
 - A copy of your blih repositories.
-- A Github account. You must be able to push using SSH.
+- A Github account. You must be able to push using SSH. Otherwise it'll use HTTPS
 - A [Github organisation](https://github.com/account/organizations/new?coupon=&plan=team_free)
 - A [Github API Key](https://github.com/settings/tokens/new) (Tick '*repo*' to give the acces token the required scopes)
 - Bash
