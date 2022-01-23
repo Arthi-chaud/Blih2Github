@@ -3,10 +3,10 @@ on: [push, workflow_dispatch]
 
 jobs:
   tests:
+    env:
+      orga: EpiBlih
     strategy:
       fail-fast: false
-      env:
-        orga: EpiBlih
       matrix:
         include:
           - runs-on: ubuntu-latest
